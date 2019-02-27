@@ -1,0 +1,16 @@
+dist: xenial
+language: python
+python:
+  - "3.6"
+services: 
+  - mysql
+env: 
+  -DJANGO=2.1 DB=mysql
+install:
+  - 'pip install pipenv'
+  - 'pipenv install'
+script: 
+  - python manage.py test
+branches:
+  only:
+    - develop
