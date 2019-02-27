@@ -9,6 +9,8 @@ env:
 install:
   - 'pip install pipenv'
   - 'pipenv install'
+before_script:
+  - mysql -e 'create database pj2;' -u root
 script: 
   - python src/manage.py test
 branches:
