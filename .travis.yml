@@ -10,7 +10,7 @@ install:
   - 'pip install pipenv'
   - 'pipenv install'
 script: 
-  - python manage.py test
+  - python src/manage.py test
 branches:
   only:
     - develop
