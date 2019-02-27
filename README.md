@@ -16,3 +16,4 @@ Install dependencies:
 `sudo apt-get install python3-dev libmysqlclient-dev` (make sure virtual env. is activating)
 
 `pipenv install`
+
