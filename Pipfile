@@ -1,13 +1,13 @@
 [[source]]
+name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
-name = "pypi"
-
-[packages]
-django = "==2.1.7"
 
 [dev-packages]
-django = "==2.1.7"
+
+[packages]
+django = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.6"
