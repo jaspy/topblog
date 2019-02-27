@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import *
+from tinymce.widgets import TinyMCE
 
 
 class CommentInline(admin.TabularInline):
@@ -28,6 +29,10 @@ class PostAdmin(admin.ModelAdmin):
     )
 
     inlines = (CommentInline,)
+
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()}
+    }
 
 
 admin.site.register(Post, PostAdmin)
