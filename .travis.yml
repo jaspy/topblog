@@ -9,8 +9,10 @@ env:
 install:
   - 'pip install pipenv'
   - 'pipenv install'
-before_install:
-  - mysql -e 'CREATE DATABASE pj2;'
+before_script:
+- mysql -u root -e 'CREATE DATABASE pj2;'
+- mysql -u root -e "CREATE USER 'pj2'@'localhost' IDENTIFIED BY '123';"
+- mysql -u root -e "GRANT ALL ON pj2.* TO 'pj2'@'localhost';"
 script: 
   - python src/manage.py test
 branches:
