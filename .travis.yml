@@ -1,22 +1,30 @@
 dist: xenial
 language: python
 python:
-  - "3.6"
-services: 
-  - mysql
-env: 
-  -DJANGO=2.1 DB=mysql
+- '3.6'
+services:
+- mysql
+env: "-DJANGO=2.1 DB=mysql"
 install:
-  - 'pip install pipenv'
-  - 'pipenv install'
+- pip install pipenv
+- pipenv install
 before_script:
 - mysql -u root -e 'CREATE DATABASE pj2;'
 - mysql -u root -e "CREATE USER 'pj2'@'localhost' IDENTIFIED BY '123';"
 - mysql -u root -e "GRANT ALL ON pj2.* TO 'pj2'@'localhost';"
 - mysql -u root -e "GRANT ALL ON test_pj2.* TO 'pj2'@'localhost';"
-script: 
-  - cd src
-  - python manage.py test
+script:
+- cd src
+- python manage.py test
 branches:
   only:
-    - develop
+  - develop
+notifications:
+  slack:
+    secure: WAcc9UE+TkgmAGsMEO7qj8yw1K1hGrGsNLpvcoX4O+kVoXMuyLFmoksrz6WmwL0IHg07UkL9i2rM5q0kKaVwmTGjQ4w+/DYopWwb2Zhf2tk8dmkIh7wZQxrmdBnzGXOLdQfjplInNr0xdMGe6zqZ/G/ZdZzrGs2YCATbNtBZpHJCo+T9JZn3jr4+lSEkQmWTF8SN0EWOgw656Q3eWPv4D2iX4/N83EJqlZdORt2jSoBm3YVU/OzHz14UbcZ9J+y1pRJpaKdUP3tPp/MmgH7Im+QOEm/H63kp8C+eDplx76C9z45QjLp8qt4hTGixs7CNxAYGISE1PmBVqzdgonGkVMprLWZk4Er7b3SA/p5+BiINxCuvqczTXhPccMV38QvLiaProt6JSktfvi2biZnKoWh8AUrzfe9IP3DTe32Ab+9eGyoxmktpnUBJjpu8nts1yoJ6ubwu+Qlr9W2bzQhg7HEq1h99gV/ZRJr6WQNWO0UDV4wBBUTtRRh0WaUPd4/0s3kBorlkveWMZvnuRUbObTtqvtYaH90RTUI+mWJ2Bfv+wZTyt2bUwkNyH1/iToXywXiTHXIRyJQIp+BTGy9MPthiiVi41IAg7y79nxFKrgE9rLtAudmuzXADjIk3P3sS1S8H8NUHeTiDOKLZhXIxCDMENAoYOhf213e0NJkz+HQ=
+    on_success: always
+    on_failure: always
+    template:
+      - "Repo `%{repository_slug}` *%{result}* build (<%{build_url}|#%{build_number}>) for commit (<%{compare_url}|%{commit}>) on branch `%{branch}`."
+      - "Execution time: *%{duration}*"
+      - "Message: %{message}"
