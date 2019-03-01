@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 mysqlclient = "*"
 django-tinymce4-lite = "*"
+Pillow = "*"
 
 [requires]
 python_version = "3.6"

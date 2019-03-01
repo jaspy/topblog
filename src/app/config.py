@@ -5,8 +5,8 @@ mysql = {
        'ENGINE': 'django.db.backends.mysql',
        'NAME': 'pj2',
        'HOST': 'localhost',
-       'PORT': 3306,
-       'USER': 'pj2',
+       'PORT': 8000,
+       'USER': 'sasha',
        'PASSWORD': '123',
    }
 }

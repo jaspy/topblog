@@ -13,7 +13,6 @@ class CommentInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
 
     readonly_fields = ('created_at', 'updated_at')
-
     fieldsets = (
         ('', {
             'fields': ('title', 'author')
@@ -25,6 +24,10 @@ class PostAdmin(admin.ModelAdmin):
         ('Content', {
             'classes': ('extrapretty'),
             'fields': ('content',)
+        }),
+        ('Load main image', {
+            'fields': ('image',),
+            'classes': ('collapse',)
         }),
     )
 
