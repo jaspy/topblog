@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from time import time
-
+from django.contrib.contenttypes.models import ContentType
 
 
 def gen_slug(s):
@@ -37,7 +37,6 @@ class Post(models.Model):
         for i in range(200,len(self.content)):
             if self.content[i] == '<':
                 return self.content[0:i]
-            
 
     def __str__(self):
         return self.title

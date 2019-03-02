@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -23,13 +22,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{% url 'blog-home'%}">
                     <img src="{% static "images/logo.png" %}" width="30" height="30" alt="">
                 </a>
-                <a class="navbar-brand" href="#">TopBlog</a>
+                <a class="navbar-brand" href="{% url 'blog-home'%}">TopBlog</a>
                 <ul class="navbar-nav" style="margin-left: 600px;">
                     <li class="nav-item active p">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'blog-home'%}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Post Now</a>
