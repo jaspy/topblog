@@ -146,9 +146,18 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
     'content_css': "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css",
+    'mobile': {
+        'theme': 'mobile', 
+        'plugins': [ 'autosave', 'lists', 'autolink' ],
+        'toolbar': [ 'undo', 'bold', 'italic', 'styleselect' ],
+        },
     }
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static-root')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

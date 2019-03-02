@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% block content %}
     <div class="card mb-3" style="height: 90%;">
     <img src="{{post.image.url}}" class="card-img-top mr-auto ml-2 mt-2"
@@ -6,7 +7,7 @@
         <div class="card-body">
             <h3 class="card-title ml-4">{{post.title}}</h3>
             <hr>
-            <p class="card-text content-markdown">{{post.content}}</p>
+            <p class="card-text content_mark">{{post.content|safe}}</p>
             <p class="card-text"><small class="text-muted">{{post.created_at}}</small></p>
             <hr>
         </div>
@@ -14,12 +15,26 @@
         
         <div class="input-group mb-3 ml-4" style="width: 90%">
             <div class="input-group mb-3" >
-                <input type="text" class="form-control" placeholder="Write your comment here..."
-                 aria-label="Write your comment here..." aria-describedby="button-addon2">
+                <textarea type="text" class="form-control" placeholder="Write your comment here..."></textarea>
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="button" id="button-addon2">Comment now!</button>
+                </div>                
+            </div>
+            
+        </div>
+        <h4 class="mt4 ml-4">Comments</h4>
+        {% for comment in post.comment_set.all %}
+            <div class="media mb-4 ml-4 mr-5 mt-2">
+                <img src="{% static 'images/user.png' %}" width='64' class="mr-3" alt="...">
+                <div class="media-body">
+                    <h5 class="mt-0">{{ comment.author }}</h5>
+                    {{ comment.message }}
                 </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
+
 {% endblock%}
+
+{% block css_addict %}<link href="{% static "tinymce/css/prism.css" %}" rel="stylesheet">{% endblock %}
+{% block scr_addict %}<script src="{% static "tinymce/js/prism.js" %}"></script>{% endblock %}
