@@ -10,15 +10,3 @@ mysql = {
        'PASSWORD': '123',
    }
 }
-"""
-mysql = {
-   'default': {
-       'ENGINE': 'django.db.backends.mysql',
-       'NAME': 'pj2',
-       'HOST': 'localhost',
-       'PORT': 8000,
-       'USER': 'sasha',
-       'PASSWORD': '123',
-   }
-}
-"""
