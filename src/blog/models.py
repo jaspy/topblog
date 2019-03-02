@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from time import time
 
 
+
 def gen_slug(s):
     new_slug = slugify(s, allow_unicode=True)
     return new_slug + '-' + str(int(time()))
@@ -27,7 +28,16 @@ class Post(models.Model):
         if not self.id:
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
+    
+    def get_content(self):
+        correct_contnt = []
+        if len(self.content) < 200:
+            return self.content
 
+        for i in range(200,len(self.content)):
+            if self.content[i] == '<':
+                return self.content[0:i]
+            
 
     def __str__(self):
         return self.title

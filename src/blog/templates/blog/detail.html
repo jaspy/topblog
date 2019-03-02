@@ -1,1 +1,4 @@
-{{post.title}}
+{% extends "blog/base.html" %}
+{% block content %}
+    <p class="content-markdown">'{{post.content}}</p>
+{% endblock%}
