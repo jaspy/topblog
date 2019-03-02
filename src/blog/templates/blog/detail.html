@@ -12,26 +12,34 @@
             <hr>
         </div>
 
+        <h4 class="mt4 ml-4">Comments</h4>
         
-        <div class="input-group mb-3 ml-4" style="width: 90%">
+        {% for comment in post.comment_set.all %}
+                <div class="card mb-3 ml-3 mt-1" style="width: 95%;height: 5%">
+                    <div class="row no-gutters">
+                        <div class="col-md-4  ml-1"style="max-height 130px;max-width: 120px">'
+                            <img src="{% static 'images/user.png' %}" class="card-img"
+                            style="max-height: 100px;max-width: 100px;">
+                            <h5 class="card-title ml-3" style="max-height: 40px;">{{ comment.author }}</h5>
+                        </div>
+                        <div class="col-md-8" style="max-width: 200px">
+                            <div class="card-body">
+                            <p class="card-text">{{ comment.message }}</p>
+                            <p class="card-text mt-4"><small class="text-muted">{{ comment.created_at }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+        <hr>
+        <div class="input-group mb-3 ml-3 mt-1" style="width: 95%">
             <div class="input-group mb-3" >
                 <textarea type="text" class="form-control" placeholder="Write your comment here..."></textarea>
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="button" id="button-addon2">Comment now!</button>
                 </div>                
-            </div>
-            
+            </div>     
         </div>
-        <h4 class="mt4 ml-4">Comments</h4>
-        {% for comment in post.comment_set.all %}
-            <div class="media mb-4 ml-4 mr-5 mt-2">
-                <img src="{% static 'images/user.png' %}" width='64' class="mr-3" alt="...">
-                <div class="media-body">
-                    <h5 class="mt-0">{{ comment.author }}</h5>
-                    {{ comment.message }}
-                </div>
-            </div>
-        {% endfor %}
     </div>
 
 {% endblock%}

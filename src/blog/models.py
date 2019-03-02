@@ -30,13 +30,12 @@ class Post(models.Model):
         super().save(*args, **kwargs)
     
     def get_content(self):
-        correct_contnt = []
         if len(self.content) < 200:
             return self.content
 
         for i in range(200,len(self.content)):
-            if self.content[i] == '<':
-                return self.content[0:i]
+            if self.content[i] == '>':
+                return self.content[0:i+1]
 
     def __str__(self):
         return self.title
