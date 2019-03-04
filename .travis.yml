@@ -15,7 +15,7 @@ before_script:
 - mysql -u root -e "GRANT ALL ON test_pj2.* TO 'pj2'@'localhost';"
 script:
 - cd src
-- python manage.py test
+- python manage.py test blog
 branches:
   only:
   - develop
