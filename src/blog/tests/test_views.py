@@ -9,8 +9,8 @@ class TestViews(TestCase):
         self.client = Client()
         self.Model1 = Post.objects.create(
             title='Test1',
-            content="Test content1",
             author='TestAuthor',
+            content="Test content1",
         )
 
     def test_home_GET(self):
@@ -21,6 +21,7 @@ class TestViews(TestCase):
 
     def test_detail_GET(self):
 
-        response = self.client.get(reverse('post-detail', args=[Post.objects.first().slug]))
+        slug = Post.objects.first().slug
+        response = self.client.get(reverse('post-detail', args=[slug]))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'blog/detail.html')
