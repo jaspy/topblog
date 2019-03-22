@@ -3,6 +3,8 @@ from django.shortcuts import HttpResponse, render
 from django.http import JsonResponse
 from .models import Post
 from django.templatetags.static import static
+from app.settings import TIME_ZONE
+from pytz import timezone
 
 class PostListView(ListView):
     model = Post
@@ -26,9 +28,9 @@ class CreateCommentView(View):
     def post(self, request, slug):
         comment = request.POST.get('comment')
         post = Post.objects.get(slug__iexact=slug)
-        post.comment_set.create(author='user123', message=comment)
+        created_comment = post.comment_set.create(author='user123', message=comment)
         response = {
-            'author': 'user123',
+            'created_at': created_comment.created_at.astimezone(timezone(TIME_ZONE)).strftime("%Y-%m-%d %H:%M:%S"),
             'message': comment,
         }
         return JsonResponse(response)

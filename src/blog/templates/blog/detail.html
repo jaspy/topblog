@@ -14,7 +14,7 @@
 
         <form id='comment_form' action="/comment-create/{{post.slug}}" method="POST">
             {% csrf_token %}
-            <div class="input-group mb-3 ml-4" style="width: 90%">
+            <div class="input-group mb-3" style="width: 90%; margin: 0 5%;">
                 <div class="input-group mb-3" >
                     <textarea type="text" id="comment_text" class="form-control" placeholder="Write your comment here..." required></textarea>
                     <div class="input-group-append">
@@ -39,8 +39,8 @@
                 <div class="media mb-4 ml-4 mr-5 mt-2">
                     <img src="{% static 'images/user.png' %}" width='64' class="mr-3" alt="...">
                     <div class="media-body">
-                        <h5 class="mt-0">{{ comment.author }}</h5>
-                        {{ comment.message }}
+                        <h6 class="mt-0"><b>{{ comment.created_at|date:'Y-m-d H:i:s' }}</b></h6>
+                        <span style="word-break: break-all">{{ comment.message }}</span>
                     </div>
                 </div>
             {% endfor %}
@@ -78,8 +78,8 @@
             $(".comments-all").prepend(`<div class="media mb-4 ml-4 mr-5 mt-2">` +
             `<img src="{{ user_default }}" width='64' class="mr-3" alt="...">` +
             '<div class="media-body">' +
-                '<h5 class="mt-0">'+ data.author + '</h5>' + 
-                data.message +
+                '<h6 class="mt-0"><b>'+ data.created_at + '</b></h6>' +                 
+                '<span style="word-break: break-all">'+data.message+'</span>' +
             '</div>');
             form[0].reset();
             }
@@ -94,14 +94,14 @@
                 type: "GET",
                 async: true,
                 success: data => {
-                    console.log(typeof data)
+                    console.log(data)
                     $(".comments-all").html("")
                     for (const comment of data) {
                         $(".comments-all").append(`<div class="media mb-4 ml-4 mr-5 mt-2">` +
                         `<img src="{{ user_default }}" width='64' class="mr-3" alt="...">` +
                         '<div class="media-body">' +
-                            '<h5 class="mt-0">'+ comment.author + '</h5>' + 
-                            comment.message +
+                            '<h6 class="mt-0"><b>'+ comment.created_at + '</b></h6>' +                             
+                            '<span style="word-break: break-all">'+comment.message+'</span>' +
                         '</div>');
                     }
                 }

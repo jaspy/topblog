@@ -3,7 +3,8 @@ from django.shortcuts import reverse
 from django.utils.text import slugify
 from time import time
 from django.contrib.contenttypes.models import ContentType
-
+from pytz import timezone
+from app.settings import TIME_ZONE
 
 def gen_slug(s):
     new_slug = slugify(s, allow_unicode=True)
@@ -60,4 +61,5 @@ class Comment(models.Model):
         return {
             'author': self.author,
             'message': self.message,
+            'created_at': self.created_at.astimezone(timezone(TIME_ZONE)).strftime("%Y-%m-%d %H:%M:%S"),
         }
