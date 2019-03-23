@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
     <div class="card mb-3" style="height: 90%;">
-    <img src="{{post.image.url}}" class="card-img-top mr-auto ml-2 mt-2"
-        style="max-height:400px; width: 98%;">
+        <img src="{{ post.image.url }}" class="card-img-top mx-auto d-block mt-3" id="main-img"
+            style="max-height:500px; max-width: 700px;"></p>
         <div class="card-body">
             <h3 class="card-title ml-4">{{post.title}}</h3>
             <hr>
@@ -18,7 +18,7 @@
                 <div class="input-group mb-3" >
                     <textarea type="text" id="comment_text" class="form-control" placeholder="Write your comment here..." required></textarea>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-success" type="submit" id="ebanaiaknopka">Comment now!</button>
+                        <button class="btn btn-outline-success" type="submit" id="buttt">Comment now!</button>
                     </div>                
                 </div>            
             </div>
@@ -49,7 +49,10 @@
 
 {% endblock%}
 
-{% block css_addict %}<link href="{% static "tinymce/css/prism.css" %}" rel="stylesheet">{% endblock %}
+{% block css_addict %}
+<link href="{% static "tinymce/css/prism.css" %}" rel="stylesheet">
+{% endblock css_addict %}
+
 {% block scr_addict %}<script src="{% static "tinymce/js/prism.js" %}"></script>{% endblock %}
 
 {% block jqu_addict %}

@@ -1,0 +1,21 @@
+@media screen and (max-width: 1090px) {
+    div.card img#main-img {
+        margin-top: 0!important;
+    }
+
+    div nav div ul {
+        text-align: center;
+    }
+
+    div nav div ul li {
+        display: inline;
+
+    }
+}
+
+@media screen and (max-width: 770px) {
+    div.card-deck div.cart-autor div.card {
+        max-width: 100%!important;
+        margin-bottom: 10px;
+    }
+}
