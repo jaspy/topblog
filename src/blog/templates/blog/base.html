@@ -31,11 +31,13 @@
                         <a class="nav-link" href="{% url 'blog-home'%}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Post Now</a>
+                        <a class="nav-link" href="#">About</a>
                     </li>
+                    {% if user.is_authenticated and user.is_staff %}
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">About</a>
+                        <a class="nav-link" href="/admin/">Admin</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

@@ -10,6 +10,7 @@ django = "*"
 mysqlclient = "*"
 django-tinymce4-lite = "*"
 Pillow = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.6"
