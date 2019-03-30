@@ -124,6 +124,7 @@ TINYMCE_DEFAULT_CONFIG = {
         'plugins': [ 'autosave', 'lists', 'autolink' ],
         'toolbar': [ 'undo', 'bold', 'italic', 'styleselect' ],
         },
+    'extended_valid_elements': 'img[class|src|border=0|alt|title|hspace|vspace|align|onmouseover|onmouseout|name]'
     }
 
 STATIC_URL = '/static/'
