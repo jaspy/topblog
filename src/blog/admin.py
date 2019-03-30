@@ -37,10 +37,5 @@ class PostAdmin(admin.ModelAdmin):
         models.TextField: {'widget': TinyMCE()}
     }
 
-
-class CommentAdmin(admin.ModelAdmin):
-    fields = ('message', 'author', 'post')
-       
-
-admin.site.register(Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
+
