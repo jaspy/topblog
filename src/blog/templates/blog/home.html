@@ -1,6 +1,41 @@
-{%for post in posts%}
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% block content %}
+{% load extrafilters %}
 
-<div>{{post.author}}</div>
-<div>{{post.content}}</div>
-<hr>
-{%endfor%}
+<div class='card'>
+	{% for post in posts%}
+	<div class="card mb-3">
+		<div class="row no-gutters">
+			<div class="col-md-4">
+				<img src="{{ post.image.url }}" class="card-img mr-auto ml-2 mt-2"
+						style="max-width: 250px;;">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<a href="{{ post.get_absolute_url }}"><h5 class="card-title">{{ post.title }}</h5></a>
+					<p class="card-text content-markdown">{{ post.content|cut_img|safe|truncatechars_html:100 }}</p>
+					<p class="card-text"><small class="text-muted">Published: {{ post.created_at }}</small></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	
+	<div class="ml-3">
+		{% for num in page_obj.paginator.page_range %}
+			{% if page_obj.number == num %}
+				<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+			{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+				<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+			{% endif %}
+		{% endfor %}
+
+		{% if page_obj.has_next %}
+			<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+			<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+		{% endif %}
+	</div>
+    
+</div>
+{% endblock %}

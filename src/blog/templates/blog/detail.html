@@ -1,0 +1,124 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block current_title %}{{ post.title }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+	<div class="card mb-3" style="height: 90%;">
+		<img src="{{ post.image.url }}" class="card-img-top mx-auto d-block mt-3" id="main-img"
+				style="max-height:500px; max-width: 700px;"></p>
+		<div class="card-body">
+			<h3 class="card-title ml-4">{{ post.title }}</h3>
+			<hr>
+			<p class="card-text content_mark">{{post.content|safe}}</p>
+			<p class="card-text"><small class="text-muted">{{post.created_at}}</small></p>
+			<hr>
+		</div>
+
+		<form id='comment_form' action="/comment-create/{{post.slug}}" method="POST">
+			{% csrf_token %}
+			<div class="input-group mb-3" style="width: 90%; margin: 0 5%;">
+				<div class="input-group mb-3" >
+					<textarea type="text" id="comment_text" class="form-control" placeholder="Write your comment here..." required></textarea>
+					<div class="input-group-append">
+						<button class="btn btn-outline-success" type="submit" id="buttt">Comment now!</button>
+					</div>                
+				</div>            
+			</div>
+		</form>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<h2 class="mr-2 mt4 ml-4">Comments</h2>
+			</div>
+			<div class="input-group-append">
+				<button class="btn btn-primary" id="f5">
+					<img width="18" src="{% static 'images/ref.svg' %}" alt="ref">
+				</button>
+			</div>
+		</div>
+		<div class="comments-all">
+			{% for comment in post.comment_set.all %}
+				<div class="media mb-4 ml-4 mr-5 mt-2">
+					<img src="{% static 'images/user.png' %}" width='64' class="mr-3" alt="...">
+					<div class="media-body">
+						<h6 class="mt-0"><b>{{ comment.created_at|date:'Y-m-d H:i:s' }}</b></h6>
+						<span style="word-break: break-all">{{ comment.message }}</span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		{% comment %} <style>
+		.card-body img {
+				width: 100% !important;
+				height: 100% !important;
+				max-width: 300px !important;
+		}
+		</style> {% endcomment %}
+	</div>
+
+{% endblock%}
+
+{% block css_addict %}
+<link href="{% static "tinymce/css/prism.css" %}" rel="stylesheet">
+{{ block.super }}
+{% endblock css_addict %}
+
+{% block scr_addict %}<script src="{% static "tinymce/js/prism.js" %}"></script>{% endblock %}
+
+{% block jqu_addict %}
+		const form = $('#comment_form');
+		const comments_box = $('#comments-all');        
+
+		form.on('submit', function(e){
+			e.preventDefault();
+			console.log($('#comment_text').val())
+
+			console.log()
+			$.ajax({
+				url: form.attr("action"),
+				type: "POST",
+				async: true,
+				data: {
+						comment: $('#comment_text').val(),
+						csrfmiddlewaretoken: '{{ csrf_token }}',
+				},
+				success: handleFormSuccess,
+			})
+		})
+
+		function handleFormSuccess(data){
+			console.log(data)
+			$(".comments-all").prepend(`<div class="media mb-4 ml-4 mr-5 mt-2">` +
+			`<img src="{{ user_default }}" width='64' class="mr-3" alt="...">` +
+			'<div class="media-body">' +
+				'<h6 class="mt-0"><b>'+ data.created_at + '</b></h6>' +                 
+				'<span style="word-break: break-all">'+data.message+'</span>' +
+			'</div>');
+			form[0].reset();
+			}
+
+		function handleFormError(error){
+			console.log(error)
+		}
+		
+		const refresher = $('#f5').on('click', function(e) {
+			$.ajax({
+				url: '/comments-get/{{ post.slug }}',
+				type: "GET",
+				async: true,
+				success: data => {
+					console.log(data)
+					$(".comments-all").html("")
+					for (const comment of data) {
+						$(".comments-all").append(`<div class="media mb-4 ml-4 mr-5 mt-2">` +
+						`<img src="{{ user_default }}" width='64' class="mr-3" alt="...">` +
+						'<div class="media-body">' +
+							'<h6 class="mt-0"><b>'+ comment.created_at + '</b></h6>' +                             
+							'<span style="word-break: break-all">'+comment.message+'</span>' +
+						'</div>');
+					}
+				}
+			})
+		})
+{% endblock jqu_addict %}
