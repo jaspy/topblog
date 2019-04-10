@@ -22,7 +22,8 @@ source venv/bin/activate
 ```
 
 First, install essential packages for correct work django with mysql. 
-`sudo apt-get install python3.6-dev libmysqlclient-dev` (make sure virtual env. is activating)
+
+`sudo apt-get install python3.6-dev libmysqlclient-dev` 
 
 Install dependencies
 ```
